@@ -1,8 +1,8 @@
 package Entities;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SlimeMoldCenter {
     List<Cell> fruitingBody;
@@ -61,7 +61,7 @@ public class SlimeMoldCenter {
         }
     }
 
-    public Point updateOnTick(List<Food> foodList) {
+    public Point updateOnTick(Map<Float, Integer> foodDict) {
         Point newCellLoc = null;
         // update each cell in population
         for (Cell cell : population) {
@@ -75,7 +75,7 @@ public class SlimeMoldCenter {
         List<Cell> new_leading_edge = new ArrayList<Cell>();
         for (Cell cell : leadingEdge) {
             // check if cell has found food
-            if (!cell.hasFoundFood((HashMap<String, Integer>) foodList)) {
+            if (!cell.hasFoundFood(foodDict)) {
                 List<Cell> new_children = cell.create_child();
                 for (Cell child : new_children) {
                     if (!board.contains(child.location)) {

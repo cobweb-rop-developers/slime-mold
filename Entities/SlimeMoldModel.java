@@ -3,11 +3,13 @@ package Entities;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 public class SlimeMoldModel {
     public List<SlimeMoldCenter> slimeMoldCenters;
     List<Point> slimeMoldCentersLoc;
     public List<Food> food;
-    HashMap<String, Integer> foodDict;
+    Map<Float, Integer> foodDict;
     int time;
 
     public SlimeMoldModel(Point startingLoc, int initialEnergy, List<int[]> foodList, float exploration) {
@@ -35,7 +37,7 @@ public class SlimeMoldModel {
         // update each slime mold center
         List<SlimeMoldCenter> newCenters = new ArrayList<>();
         for (SlimeMoldCenter center : slimeMoldCenters) {
-            Point result = center.updateOnTick(food);
+            Point result = center.updateOnTick(this.foodDict);
 
             if (result != null) {
                 // create a new slime mold center

@@ -3,9 +3,9 @@ package Entities;
 import Constants.Constants;
 
 import java.awt.*;
-import java.util.HashMap;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 
 public class Cell {
@@ -51,7 +51,7 @@ public class Cell {
         return true;
     }
 
-    public boolean hasFoundFood(HashMap<String, Integer> foodDict) {
+    public boolean hasFoundFood(Map<Float, Integer> foodDict) {
         try {
             int f = foodDict.get(this.location.hash());
             if (f > 0) {
