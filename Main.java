@@ -6,6 +6,7 @@ import org.opencv.core.Mat;
 import org.opencv.core.Scalar;
 import org.opencv.highgui.HighGui;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -18,7 +19,7 @@ public class Main {
         return CELL_RADIUS * num;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         int[][] foodList = new int[][]{
                 {mult(16), mult(-8), 500},
                 {mult(19), mult(-5), 500},
@@ -56,7 +57,6 @@ public class Main {
         SlimeMoldModel model = new SlimeMoldModel(startingLoc, initialEnergy, foodArrayList, exploration);
         ViewController vc = new ViewController(model);
         vc.startSimulation();
-
 
 
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
