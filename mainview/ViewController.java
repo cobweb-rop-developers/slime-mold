@@ -1,3 +1,5 @@
+package mainview;
+
 import Entities.SlimeMoldModel;
 
 public class ViewController {

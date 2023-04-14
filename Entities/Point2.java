@@ -2,24 +2,24 @@ package Entities;
 
 import java.awt.geom.Point2D;
 
-public class Point extends Point2D.Double {
+public class Point2 extends Point2D.Double {
 
 
     public float x;
     public float y;
 
-    public Point(float x, float y){
+    public Point2(float x, float y){
         this.x = x;
         this.y = y;
     }
 
-    public Point add(Point other){
+    public Point2 add(Point2 other){
         float x = this.x + other.x;
         float y = this.y + other.y;
-        return new Point(x, y);
+        return new Point2(x, y);
     }
 
-    public boolean same(Point other){
+    public boolean same(Point2 other){
         return (this.x == other.x) && (this.y == other.y);
     }
 

@@ -6,7 +6,7 @@ import java.util.List;
 public class StraightCell extends Cell {
     private int maxChildren;
 
-    public StraightCell(Point location, Point direction, int energy, float exploration) {
+    public StraightCell(Point2 location, Point2 direction, int energy, float exploration) {
         super(location, direction, energy, exploration);
         this.maxChildren = 1;
     }
@@ -16,7 +16,7 @@ public class StraightCell extends Cell {
         List<Cell> newChildren = new ArrayList<>();
         double createChild = Math.random();
         if (createChild < this.exploration) {
-            Point newLoc = this.location.add(this.direction);
+            Point2 newLoc = this.location.add(this.direction);
             StraightCell newCell = new StraightCell(newLoc, this.direction, this.totalEnergy - 10, this.exploration);
             newCell.set_parent(this);
             this.children.add(newCell);

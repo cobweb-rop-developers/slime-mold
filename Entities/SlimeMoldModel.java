@@ -7,12 +7,12 @@ import java.util.Map;
 
 public class SlimeMoldModel {
     public List<SlimeMoldCenter> slimeMoldCenters;
-    List<Point> slimeMoldCentersLoc;
+    List<Point2> slimeMoldCentersLoc;
     public List<Food> food;
     Map<Float, Integer> foodDict;
     int time;
 
-    public SlimeMoldModel(Point startingLoc, int initialEnergy, List<int[]> foodList, float exploration) {
+    public SlimeMoldModel(Point2 startingLoc, int initialEnergy, List<int[]> foodList, float exploration) {
         slimeMoldCenters = new ArrayList<>();
         slimeMoldCentersLoc = new ArrayList<>();
         food = new ArrayList<>();
@@ -25,7 +25,7 @@ public class SlimeMoldModel {
 
         // initialize food
         for (int[] f : foodList) {
-            Point foodLoc = new Point(f[0], f[1]);
+            Point2 foodLoc = new Point2(f[0], f[1]);
             food.add(new Food(foodLoc, f[2]));
         }
     }
@@ -37,11 +37,11 @@ public class SlimeMoldModel {
         // update each slime mold center
         List<SlimeMoldCenter> newCenters = new ArrayList<>();
         for (SlimeMoldCenter center : slimeMoldCenters) {
-            Point result = center.updateOnTick(this.foodDict);
+            Point2 result = center.updateOnTick(this.foodDict);
 
             if (result != null) {
                 // create a new slime mold center
-                Point newLoc = result;
+                Point2 newLoc = result;
                 if (!slimeMoldCentersLoc.contains(newLoc)) {
                     int foodEnergy = findFoodEnergy(newLoc);
                     int energy = center.fruitingBody.get(0).totalEnergy;
@@ -61,8 +61,8 @@ public class SlimeMoldModel {
     }
 
     // uses hashmap
-    public int findFoodEnergy(Point location) {
-        Point l = new Point((int) location.x, (int) location.y);
+    public int findFoodEnergy(Point2 location) {
+        Point2 l = new Point2((int) location.x, (int) location.y);
         int food_energy = 0;
         try {
             food_energy = this.foodDict.get(l);
@@ -71,7 +71,7 @@ public class SlimeMoldModel {
         }
 
         for (Food food : this.food) {
-            Point food_loc = new Point(food.location.x, food.location.y);
+            Point2 food_loc = new Point2(food.location.x, food.location.y);
             if (food_loc.same(location)) {
                 food_energy = food.energy;
             }

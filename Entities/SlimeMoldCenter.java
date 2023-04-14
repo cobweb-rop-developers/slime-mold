@@ -8,13 +8,13 @@ public class SlimeMoldCenter {
     List<Cell> fruitingBody;
     List<Cell> leadingEdge;
     public List<Cell> population;
-    List<Point> board;
-    Point startingLoc;
+    List<Point2> board;
+    Point2 startingLoc;
     int initialEnergy;
     float exploration;
     int CELL_RADIUS = 1;
 
-    public SlimeMoldCenter(Point startingLoc, int initialEnergy, float exploration) {
+    public SlimeMoldCenter(Point2 startingLoc, int initialEnergy, float exploration) {
 
         this.population = new ArrayList<Cell>();
         this.fruitingBody = new ArrayList<Cell>();
@@ -28,25 +28,25 @@ public class SlimeMoldCenter {
                 {CELL_RADIUS / 2, -CELL_RADIUS / 2}, {-CELL_RADIUS / 2, -CELL_RADIUS / 2}};
 
         for (int[] dir : dirs) {
-            Point new_loc = new Point(startingLoc.x + dir[0], startingLoc.y + dir[1]);
+            Point2 new_loc = new Point2(startingLoc.x + dir[0], startingLoc.y + dir[1]);
             if (dir[0] == 0 && dir[1] == 0) {
-                Cell new_cell = new Cell(new_loc, new Point(dir[0], dir[1]), initialEnergy, exploration);
+                Cell new_cell = new Cell(new_loc, new Point2(dir[0], dir[1]), initialEnergy, exploration);
                 new_cell.maxChildren = 0;
                 fruitingBody.add(new_cell);
                 population.add(new_cell);
             } else if (new_loc.x == 0 || new_loc.y == 0) {
-                StraightCell new_cell = new StraightCell(new_loc, new Point(dir[0], dir[1]), initialEnergy, exploration);
+                StraightCell new_cell = new StraightCell(new_loc, new Point2(dir[0], dir[1]), initialEnergy, exploration);
                 fruitingBody.add(new_cell);
                 population.add(new_cell);
             } else {
-                DiagonalCell new_cell = new DiagonalCell(new_loc, new Point(dir[0], dir[1]), initialEnergy, exploration);
+                DiagonalCell new_cell = new DiagonalCell(new_loc, new Point2(dir[0], dir[1]), initialEnergy, exploration);
                 fruitingBody.add(new_cell);
                 population.add(new_cell);
             }
         }
 
         this.leadingEdge = new ArrayList<Cell>(this.fruitingBody);
-        this.board = new ArrayList<Point>();
+        this.board = new ArrayList<Point2>();
 
         for (Cell cell : population) {
             board.add(cell.location);
@@ -61,8 +61,8 @@ public class SlimeMoldCenter {
         }
     }
 
-    public Point updateOnTick(Map<Float, Integer> foodDict) {
-        Point newCellLoc = null;
+    public Point2 updateOnTick(Map<Float, Integer> foodDict) {
+        Point2 newCellLoc = null;
         // update each cell in population
         for (Cell cell : population) {
             boolean alive = cell.updateOnTick();

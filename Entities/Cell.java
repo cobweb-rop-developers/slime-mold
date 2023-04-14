@@ -10,8 +10,8 @@ import java.util.Map;
 
 public class Cell {
     // An individual subject in the simulation.
-    public Point location;
-    Point direction;
+    public Point2 location;
+    Point2 direction;
     int totalEnergy;
     List<Cell> children;
     Cell parent;
@@ -19,7 +19,7 @@ public class Cell {
     float exploration;
     int maxChildren;
 
-    public Cell(Point location, Point direction, int energy, float exploration) {
+    public Cell(Point2 location, Point2 direction, int energy, float exploration) {
         // Construct a cell with its location and direction.
         this.location = location;
         this.direction = direction;

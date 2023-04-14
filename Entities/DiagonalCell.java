@@ -6,27 +6,27 @@ import java.util.Random;
 
 public class DiagonalCell extends Cell {
     int max_children;
-    List<Point> children_dirs;
+    List<Point2> children_dirs;
 
-    public DiagonalCell(Point location, Point direction, int energy, float exploration) {
+    public DiagonalCell(Point2 location, Point2 direction, int energy, float exploration) {
         super(location, direction, energy, exploration);
         this.max_children = 3;
-        this.children_dirs = new ArrayList<Point>();
+        this.children_dirs = new ArrayList<Point2>();
         this.children_dirs.add(direction);
-        this.children_dirs.add(new Point(0, direction.y));
-        this.children_dirs.add(new Point(direction.x, 0));
+        this.children_dirs.add(new Point2(0, direction.y));
+        this.children_dirs.add(new Point2(direction.x, 0));
     }
 
     @Override
     public List<Cell> create_child() {
         // diagonal cell creates 3 cell children
         List<Cell> new_children = new ArrayList<Cell>();
-        List<Point> created_dirs = new ArrayList<Point>();
+        List<Point2> created_dirs = new ArrayList<Point2>();
 
-        for (Point dir : this.children_dirs) {
+        for (Point2 dir : this.children_dirs) {
             float create_child = new Random().nextFloat();
             if (create_child < this.exploration) {
-                Point new_loc = this.location.add(dir);
+                Point2 new_loc = this.location.add(dir);
 
                 Cell new_cell;
                 if (dir.x == 0) {
@@ -46,7 +46,7 @@ public class DiagonalCell extends Cell {
             }
         }
 
-        for (Point dir : created_dirs) {
+        for (Point2 dir : created_dirs) {
             this.children_dirs.remove(dir);
         }
 
